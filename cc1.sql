@@ -104,3 +104,59 @@ SELECT * FROM movies ORDER BY director_lname ASC;
 DELETE FROM movies WHERE director_lname BETWEEN 'r%' AND 'z%';
 
 SELECT * FROM movies LIMIT 3;
+
+-- hard 
+
+-- Make a copy of your Medium Challenge 
+-- Write out the queries that would add the director’s First Name and Last Name into two separate columns.
+ALTER TABLE movies
+ADD director_fname VARCHAR(30);
+
+ALTER TABLE movies
+ADD director_lname VARCHAR(30);
+
+-- Create a query that puts the names together. 
+SELECT  *, CONCAT(director_fname,' ', director_lname) as fullname
+FROM movies;
+
+UPDATE movies SET director_fname = 'jacky', 
+director_lname = 'mendoza' WHERE title = 'howls moving castle';
+
+UPDATE movies SET director_fname = 'reggie', 
+director_lname = 'johnson ' WHERE title = 'shrek 2';
+
+UPDATE movies SET director_fname = 'coffee', 
+director_lname = 'the cat' WHERE title = 'coco';
+
+-- Create a query to put the list in alphabetical order by the last name from A-Z 
+-- After you order the list, remove the Movies where the Last Name ends with ”R-Z” 
+-- Write a query where the first three appear
+
+SELECT * FROM movies ORDER BY director_lname ASC;
+
+DELETE FROM movies WHERE director_lname BETWEEN 'r%' AND 'z%';
+
+SELECT * FROM movies LIMIT 3;
+
+-- very hard 
+
+-- Copy the table from your Very Easy Challenge 
+-- Write a query to add in three cars at once 
+
+INSERT INTO top_cars (make, model, car_year) VALUES 
+('honda', 'civic', '1972'),
+('honda', 'jazz', '2001'),
+('jeep', 'wrangler', '1987');
+
+-- Write a query to add in prices and colors for each of these cars
+
+ALTER TABLE top_cars ADD price INT;
+ALTER TABLE top_cars ADD color VARCHAR(20);
+
+-- Write a query to put the Make and Model together in one column
+
+SELECT  *, CONCAT(make,' ', model) as make_model
+FROM top_cars;
+
+-- Create a new query that adds an additional column to the results to show how many cars have the same Make.
+SELECT make, COUNT(*) FROM top_cars GROUP BY make;
