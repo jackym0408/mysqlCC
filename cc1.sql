@@ -72,3 +72,35 @@ INSERT INTO movies(title, release_date, rating) VALUES
 -- where the title includes the letter “s”
 SELECT * FROM movies WHERE title LIKE '%s' ORDER BY release_date DESC;
 
+-- hard 
+
+-- Make a copy of your Medium Challenge 
+-- Write out the queries that would add the director’s First Name and Last Name into two separate columns.
+ALTER TABLE movies
+ADD director_fname VARCHAR(30);
+
+ALTER TABLE movies
+ADD director_lname VARCHAR(30);
+
+-- Create a query that puts the names together. 
+SELECT  *, CONCAT(director_fname,' ', director_lname) as fullname
+FROM movies;
+
+UPDATE movies SET director_fname = 'jacky', 
+director_lname = 'mendoza' WHERE title = 'howls moving castle';
+
+UPDATE movies SET director_fname = 'reggie', 
+director_lname = 'johnson ' WHERE title = 'shrek 2';
+
+UPDATE movies SET director_fname = 'coffee', 
+director_lname = 'the cat' WHERE title = 'coco';
+
+-- Create a query to put the list in alphabetical order by the last name from A-Z 
+-- After you order the list, remove the Movies where the Last Name ends with ”R-Z” 
+-- Write a query where the first three appear
+
+SELECT * FROM movies ORDER BY director_lname ASC;
+
+DELETE FROM movies WHERE director_lname BETWEEN 'r%' AND 'z%';
+
+SELECT * FROM movies LIMIT 3;
